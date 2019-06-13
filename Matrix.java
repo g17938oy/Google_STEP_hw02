@@ -5,7 +5,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
  
 public class Matrix extends Application {
-    static long[] data; 
+    static double[] data; 
    
 
     
@@ -25,7 +25,6 @@ public class Matrix extends Application {
 		
 	// Seriesにデータを設定
 	for(int i = 2;i < data.length;i++) {
-	    System.out.println("i=" + i+ ": data[i]= " +data[i]);
 	    xy.getData().add(new XYChart.Data<>(String.valueOf(i), data[i]));
 	}
 		
@@ -41,13 +40,9 @@ public class Matrix extends Application {
 
        public static void  makeData() {
 	int max = 300;
+	data = new double[max];
 	for(int n = 2; n < max; n++) {
-	    /*if (args.length != 1) {
-	      System.out.println("usage: java Matrix N");
-	      return;
-	      }
-	      int n = Integer.parseInt(args[0]);
-	    */
+
 	    double[][] a = new double[n][n]; // Matrix A
 	    double[][] b = new double[n][n]; // Matrix B
 	    double[][] c = new double[n][n]; // Matrix C
@@ -70,13 +65,12 @@ public class Matrix extends Application {
 
 	    int k;
 	    double s = 0.0;
-	    int m = 0;
+	  
     
 	    for (i = 0; i < n; i++) {
 		for (j = 0; j < n; j++) {
 		    for (k = 0; k < n; k++) {
 			s = s + a[i][k] * b[k][j];
-			//System.out.println("s:" + s);
 		    }
 	  
 		    c[i][j] = s;
@@ -84,11 +78,11 @@ public class Matrix extends Application {
 		}     
 	    }
     
-	    data = new long[max]; 
+	  
 
 	    long end = System.currentTimeMillis();
-	    System.out.printf("N= " + n + " time: %.6f sec\n", (end - begin) / 1000.0);
-	    data[i] = (end- begin)/1000L;
+	
+	    data[i] = (end- begin)/1000.0;
 	    
 	    // Print C for debugging. Comment out the print before measuring the execution time.
 	    double sum = 0;
